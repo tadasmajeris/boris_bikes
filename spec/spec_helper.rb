@@ -1,4 +1,5 @@
 require_relative '../lib/docking_station'
+require_relative  '../lib/bike'
 
 RSpec.configure do |config|
  # Use color in STDOUT
