@@ -1,13 +1,8 @@
 require 'spec_helper'
 
-describe 'DockingStation' do
-  before :each do
-    @DockingStation = DockingStation.new
-  end
+describe DockingStation do
 
-  it 'responds to release_bike' do
-    expect(subject).to respond_to :release_bike
-  end
+  it {is_expected.to respond_to :release_bike}
 
   it 'releases working bikes' do
     bike = subject.release_bike
