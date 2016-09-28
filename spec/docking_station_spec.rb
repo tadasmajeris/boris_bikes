@@ -3,16 +3,6 @@ describe DockingStation do
   it { is_expected.to respond_to :release_bike }
   it { is_expected.to respond_to(:dock).with(1).argument }
 
-<<<<<<< HEAD
-#  it "produces working bikes" do
-#    red = subject.release_bike
-#    expect(red).to be_working
-#  end
-#  it "docks something" do
-#    bike = Bike.new
-#    expect(subject.dock(bike)).to eq bike
-#  end
-=======
   #it "produces working bikes" do
   #  red = subject.release_bike
   #  expect(red).to be_working
@@ -21,7 +11,6 @@ describe DockingStation do
     bike = Bike.new
     expect(subject.dock(bike)).to eq [bike]
   end
->>>>>>> fb09817f6b72abe4e2ba1f9e21da75835918c6d9
 
   describe '#release_bike' do
     it 'releases a bike' do
