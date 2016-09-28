@@ -28,9 +28,9 @@ describe DockingStation do
       #  bike = @bike
       #    expect {subject.dock(bike) }.to raise_error ("Oh no! There's already a bike here!")
       subject.dock(Bike.new)
-      expect { sucject.dock Bike.new }.to raise_error "Oh no! There's already a bike here!"
+      expect { subject.dock Bike.new }.to raise_error "Oh no! There's already a bike here!"
     end
-  end  
+  end
 
 
 end
