@@ -10,9 +10,20 @@ describe DockingStation do
 
   it { is_expected.to respond_to :capacity }
 
-  it 'should let user set capacity and return that new capacity' do
-    expect(DockingStation.new(30).capacity).to eq 30
+  describe 'has variable capacity' do
+    new_capacity = 30
+    station = DockingStation.new(new_capacity)
+
+    it 'checks if setting capacity works' do
+      expect(station.capacity).to eq new_capacity
+    end
+
+    it 'raises an error when new capacity is full' do
+      new_capacity.times { station.dock(Bike.new) }
+      expect { station.dock(Bike.new) }.to raise_error "Can't park! The station is full!"
+    end
   end
+
 
   it "should have a default capacity of 20" do
     expect(DockingStation.new.capacity).to eq 20
