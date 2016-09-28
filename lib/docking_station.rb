@@ -19,9 +19,6 @@ class DockingStation
    @bikes.last
   end
 
-  def capacity
-    CAPACITY
-  end
 
   private
 
