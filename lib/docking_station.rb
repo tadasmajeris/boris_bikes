@@ -6,7 +6,7 @@ class DockingStation
 
   DEFAULT_CAPACITY = 20
 
-  def initialize(capacity = DEFAULT_CAPACITY)
+  def initialize(capacity = self.class::DEFAULT_CAPACITY)
     @bikes = []
     @capacity = capacity
   end
@@ -28,8 +28,11 @@ class DockingStation
 
   def dock(bike)
     fail 'Docking station is full' if full?
-    bikes << bike
-    bikes.last
+    add_bike(bike)
+  end
+
+  def empty?
+    bikes.empty?
   end
 
   private
@@ -40,11 +43,12 @@ class DockingStation
     bikes.select{|bike| bike.working?}.count <= 0
   end
 
-  def empty?
-    bikes.empty?
-  end
-
   def full?
     bikes.count >= capacity
+  end
+
+  def add_bike(bike)
+    bikes << bike
+    bikes.last
   end
 end

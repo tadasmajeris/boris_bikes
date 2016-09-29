@@ -1,28 +1,13 @@
-class Van
-  attr_reader :capacity, :bikes
-
+class Van < DockingStation
   DEFAULT_CAPACITY = 10
-
-  def initialize(capacity=DEFAULT_CAPACITY)
-    @bikes = []
-    @capacity = capacity
-  end
 
   def load(bike)
     fail 'Van is full' if full?
-    @bikes << bike
-    @bikes.last
+    add_bike(bike)
   end
 
   def unload
     @bikes.slice!(0, @bikes.count)
   end
 
-  def full?
-    bikes.count >= DEFAULT_CAPACITY
-  end
-
-  def empty?
-    @bikes.empty?
-  end
 end

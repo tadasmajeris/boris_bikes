@@ -10,7 +10,7 @@ describe Van do
       expect(subject.capacity).to eq 10
     end
     it 'should be empty' do
-      expect(subject.bikes).to eq []
+      expect(subject.empty?).to eq true
     end
   end
 
