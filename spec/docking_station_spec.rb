@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe DockingStation do
 
   it { is_expected.to respond_to :release_bike }
