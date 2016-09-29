@@ -23,12 +23,12 @@ class DockingStation
  	end
 
   def deliver_broken_bikes
-  broke = []
-  @twentybikes.each{|x| if x.working? == false
-    broke.push(x)
-    twentybikes.delete(x) 
-  end
-   }
+    broke = []
+    @twentybikes.each{|x| if x.working? == false
+      broke.push(x)
+      twentybikes.delete(x)
+      end
+      }
    broke
   end
 
