@@ -57,6 +57,15 @@ end
       expect { subject.dock double :bike }.to raise_error ("Docking station full")
     end
   end
+
+  describe '#deliver_broken_bikes' do
+    it "should send all broken bikes to a van" do
+      bike = Bike.new
+      bike.report_broken
+      subject.dock(bike)
+      expect(subject.deliver_broken_bikes).to eq [bike]
+    end
+  end
 end
 
 =begin
