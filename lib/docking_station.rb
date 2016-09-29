@@ -7,6 +7,7 @@ class DockingStation
   attr_reader :capacity
 
 
+
   def initialize(capacity = DEFAULT_CAPACITY)
     @twentybikes = []
     @capacity = capacity
@@ -25,7 +26,9 @@ class DockingStation
 		@twentybikes.push(bike)
 	end
 
-
+  def deliver_broken_bikes
+    @twentybikes.reject{|x| x.working? == true}
+  end
 
   private
 
@@ -38,5 +41,7 @@ class DockingStation
   def empty?
     @twentybikes.empty?
   end
+
+
 
 end
