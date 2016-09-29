@@ -13,12 +13,16 @@ class DockingStation
 
   def release_bike
     fail "No bikes available" if empty?
-    bikes.pop
+    fail "No working bikes available" if no_working_bikes?
+    find_a_working_bike
   end
 
-  def dock(bike, working=true)
+  def find_a_working_bike
+    bikes.select{|bike| bike.working?}.last
+  end
+
+  def dock(bike)
     fail 'Docking station is full' if full?
-    bike.mark_as_broken if !working
     bikes << bike
     bikes.last
   end
@@ -26,6 +30,10 @@ class DockingStation
   private
 
   attr_reader :bikes
+
+  def no_working_bikes?
+    bikes.select{|bike| bike.working?}.count <= 0
+  end
 
   def empty?
     bikes.empty?
