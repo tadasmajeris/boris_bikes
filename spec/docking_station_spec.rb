@@ -58,14 +58,16 @@ end
     end
   end
 
-  describe '#deliver_broken_bikes' do
+  describe '#select_broken_bikes' do
     it "should send all broken bikes to a van" do
       bike = Bike.new
+      station = DockingStation.new
       bike.report_broken
-      subject.dock(bike)
-      expect(subject.deliver_broken_bikes).to eq [bike]
+      station.dock(bike)
+      expect(station.select_broken_bikes).to eq [bike]
     end
   end
+
 end
 
 =begin

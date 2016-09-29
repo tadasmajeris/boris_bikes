@@ -1,14 +1,18 @@
 require_relative 'bike'
+require_relative 'van'
+require_relative 'garage'
 
 class DockingStation
 
   DEFAULT_CAPACITY = 20
 
   attr_reader :capacity, :twentybikes
+  #attr_accessor :broke
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @twentybikes = []
     @capacity = capacity
+    $broke = []
   end
 
   def release_bike
@@ -22,15 +26,15 @@ class DockingStation
 		twentybikes.push(bike)
  	end
 
-  def deliver_broken_bikes
-    broke = []
+ def select_broken_bikes
     @twentybikes.each{|x| if x.working? == false
-      broke.push(x)
+      $broke.push(x)
       twentybikes.delete(x)
       end
       }
-   broke
+   $broke
   end
+
 
   private
 
