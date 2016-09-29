@@ -7,7 +7,7 @@ describe 'report_broken' do
 	it "allows users to report broken bikes" do
 		subject.report_broken
 		status = subject.working?
-		expect(status).to be false 
+		expect(status).to be false
 	end
 end
 
