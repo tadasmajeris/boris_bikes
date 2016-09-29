@@ -14,7 +14,12 @@ class DockingStation
   def release_bike
     fail "No bikes available" if empty?
     fail "No working bikes available" if no_working_bikes?
-    find_a_working_bike
+    get_a_working_bike
+  end
+
+  def get_a_working_bike
+    bike = find_a_working_bike
+    bikes.delete(bike)
   end
 
   def find_a_working_bike
