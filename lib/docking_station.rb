@@ -16,8 +16,9 @@ class DockingStation
     bikes.pop
   end
 
-  def dock(bike)
+  def dock(bike, working=true)
     fail 'Docking station is full' if full?
+    bike.mark_as_broken if !working
     bikes << bike
     bikes.last
   end

@@ -46,6 +46,11 @@ describe DockingStation do
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
+
+    it 'returns a broken bike' do
+      bike = subject.dock(bike, false)
+      expect(bike).to_not be_working
+    end
   end
 
   describe '#release_bike' do
