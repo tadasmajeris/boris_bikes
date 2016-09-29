@@ -40,7 +40,7 @@ describe DockingStation do
       expect {subject.release_bike}.to raise_error ("Oh no! No bikes available!")
     end
 
-    
+
     it "should not release broken bikes" do
     allow(bike).to receive(:report_broken).and_return(:working?)
     allow(bike).to receive(:working?).and_return(false)
