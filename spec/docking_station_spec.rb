@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe DockingStation do
 
-  it {is_expected.to respond_to :release_bike}
-
+  it { is_expected.to respond_to :release_bike }
   it { is_expected.to respond_to(:dock).with(1).argument }
+
+  let(:bike) { double(:bike, working?: true) }
+  let(:broken_bike) { double(:bike, working?: false) }
 
   describe 'initalization' do
     it 'defaults capacity' do
@@ -30,13 +32,9 @@ describe DockingStation do
       expect { subject.dock double(:bike)  }.to raise_error "Docking station is full"
     end
 
-    let(:bike) { double(:bike) }
-
     it 'releases working bikes' do
-      subject.dock double(:bike)
-      bike = subject.release_bike
-      # bike = subject.dock(bike)
-      expect(bike).to be_working
+      subject.dock(bike)
+      expect(subject.release_bike).to be bike
     end
 
     it 'docks something' do
@@ -49,38 +47,35 @@ describe DockingStation do
     end
 
     it 'returns a broken bike' do
-      bike.mark_as_broken
-      bike = subject.dock(bike)
-      expect(bike).to_not be_working
+      bike2 = subject.dock(broken_bike)
+      expect(bike2).to_not be_working
     end
   end
 
   describe '#release_bike' do
+
     describe 'raises an error when no bikes are available' do
       it 'raises error when the station is new' do
         expect {subject.release_bike}.to raise_error "No bikes available"
       end
       it 'raises error when the station has released all bikes' do
-        20.times {subject.dock( double(:bike)  )}
+        20.times {subject.dock( bike )}
         expect {21.times {subject.release_bike}}.to raise_error "No bikes available"
       end
     end
 
     context "has 3 broken bikes" do
-      let(:bike) { double(:bike) }
       before do
         3.times do
-          bike.mark_as_broken
-          subject.dock(bike)
+          subject.dock(broken_bike)
         end
       end
       it 'doesnt release a bike and raises an error if all broken' do
         expect {subject.release_bike}.to raise_error "No working bikes available"
       end
-      it "releases a bike and that isn't broken" do
-        bike1 = double(:bike)
-        subject.dock(bike1)
-        expect(subject.release_bike).to eq bike1
+      it "releases a bike that isn't broken" do
+        subject.dock(bike)
+        expect(subject.release_bike).to eq bike
       end
     end
   end
