@@ -51,7 +51,7 @@ describe DockingStation do
       it "releases a working bike" do
         working_bike = subject.dock(bike)
         subject.dock(broken_bike)
-        expect(sub).to eq working_bike
+        expect(subject.release_bike).to eq working_bike
       end
     end
 end

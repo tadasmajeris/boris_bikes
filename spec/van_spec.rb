@@ -2,28 +2,20 @@ require 'van'
 require 'garage'
 
 describe Van do
+  it { is_expected.to respond_to(:load).with(1).argument }
+  it { is_expected.to respond_to(:unload) }
 
-describe "#pick_up_bikes" do
-  it "picks up broken bikes" do
-    bike = Bike.new
-    station = DockingStation.new
-    bike.report_broken
-    station.dock(bike)
-    station.select_broken_bikes
-    expect(subject.pick_up_bikes).to eq station.select_broken_bikes
+  describe 'initialization' do
+    it 'has a default capacity' do
+      expect(subject.capacity).to eq Van::DEFAULT_CAPACITY
+    end
   end
-end
 
-  describe '#deliver_broken_bikes' do
-   it 'delivers broken bikes to the garage' do
-   bike = Bike.new
-   station = DockingStation.new
-   garage = Garage.new
-   bike.report_broken
-   station.dock(bike)
-   station.select_broken_bikes
-   expect(subject.deliver_broken_bikes).to eq garage.collection_bay
+  describe '#load' do
+    it "should not accept bikes tan its capacity" do
+      Van::DEFAULT_CAPACITY.times { subject.load double :bike }
+      expect (subject.load double :bike).to raise_error ("Van full")
+    end
   end
- end
 
 end

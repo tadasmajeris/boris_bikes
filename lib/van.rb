@@ -1,17 +1,15 @@
-require_relative 'docking_station'
 
-class Van
+class Van < DockingStation
+  DEFAULT_CAPACITY = 10
 
-  attr_accessor :cargo
 
-  def pick_up_bikes
-    $broke
+  def load(bike)
+    fail 'Docking station full' if full?
+		bikes.push(bike)
+    bikes.last
   end
 
-  def deliver_broken_bikes
-    $cargo = []
-    $cargo.push($broke)
-    $cargo.flatten
+  def unload
   end
 
 end

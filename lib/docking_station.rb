@@ -6,7 +6,7 @@ class DockingStation
 
   attr_reader :capacity
 
-  def initialize(capacity = DEFAULT_CAPACITY)
+  def initialize(capacity = self.class::DEFAULT_CAPACITY)
     @bikes = []
     @capacity = capacity
   end
@@ -36,15 +36,15 @@ end
     bikes.last
  	end
 
-  # def deliver_broken_bikes
-  #   broke = []
-  #   @bikes.each{|x| if x.working? == false
-  #     broke.push(x)
-  #     bikes.delete(x)
-  #     end
-  #     }
-  #  broke
-  # end
+   def deliver_broken_bikes
+    broke = []
+    @bikes.each{|x| if x.working? == false
+      broke.push(x)
+      bikes.delete(x)
+      end
+      }
+   broke
+  end
 
   private
 
