@@ -27,8 +27,12 @@ class DockingStation
   end
 
   def find_a_working_bike
-    bikes.select{|bike| bike.working?}.last
-end
+    find_all_working_bikes.last
+  end
+
+  def find_all_working_bikes
+    bikes.select{|bike| bike.working?}
+  end
 
 	def dock(bike)
     fail 'Docking station full' if full?
@@ -36,7 +40,7 @@ end
     bikes.last
  	end
 
-   def find_broken_bikes
+  def find_broken_bikes
     bikes.select{|x| x.working? == false}
   end
 

@@ -8,8 +8,9 @@ class Van < DockingStation
     bikes.last
   end
 
-  def fill_van(broken_bikes)
-    broken_bikes.each{ |bike| load(bike) if !full? }
+  def fill_van(target_bikes, docking_station)
+    target_bikes.each{ |bike| load(bike) if !full? }
+    docking_station.offload_bikes(bikes)
     bikes
   end
 

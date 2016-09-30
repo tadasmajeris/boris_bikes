@@ -1,15 +1,11 @@
-require_relative 'docking_station'
-require_relative 'bike'
-require_relative 'van'
+class Garage < DockingStation
 
-class Garage
+  DEFAULT_CAPACITY = 500
 
-  attr_accessor :cargo
-
- def collection_bay
-    fixed_bikes = $broke.each {|x| x.fixed }
- end
-
-
+  def repair(broken_bikes)
+    @bikes += broken_bikes
+    @bikes.each { |bike| bike.fix }
+    @bikes
+  end
 
 end
