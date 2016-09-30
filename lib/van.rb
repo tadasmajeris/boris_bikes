@@ -2,14 +2,19 @@
 class Van < DockingStation
   DEFAULT_CAPACITY = 10
 
-
   def load(bike)
-    fail 'Docking station full' if full?
+    fail "Van full" if full?
 		bikes.push(bike)
     bikes.last
   end
 
-  def unload
+  def fill_van(broken_bikes)
+    broken_bikes.each{ |bike| load(bike) if !full? }
+    bikes
+  end
+
+  def unload_all
+    bikes.slice!(0, bikes.count)
   end
 
 end

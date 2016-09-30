@@ -36,14 +36,16 @@ end
     bikes.last
  	end
 
-   def deliver_broken_bikes
-    broke = []
-    @bikes.each{|x| if x.working? == false
-      broke.push(x)
-      bikes.delete(x)
-      end
-      }
-   broke
+   def find_broken_bikes
+    bikes.select{|x| x.working? == false}
+  end
+
+  def offload_bikes(target_bikes)
+    target_bikes.each{ |bike| bikes.delete(bike) }
+  end
+
+  def empty?
+    bikes.empty?
   end
 
   private
@@ -52,10 +54,6 @@ end
 
   def full?
     bikes.count >= capacity
-  end
-
-  def empty?
-    bikes.empty?
   end
 
 end

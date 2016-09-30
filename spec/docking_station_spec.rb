@@ -58,15 +58,26 @@ end
 
   describe '#dock' do
     it "should not accept more than 20 bikes" do
-      DockingStation::DEFAULT_CAPACITY.times { subject.dock double :bike }
-      expect { subject.dock double :bike }.to raise_error ("Docking station full")
+      DockingStation::DEFAULT_CAPACITY.times { subject.dock bike }
+      expect { subject.dock bike }.to raise_error ("Docking station full")
     end
   end
 
-  # describe '#deliver_broken_bikes' do
-  #   it "should send all broken bikes to a van" do
-  #     subject.dock(broken_bike)
-  #     expect(subject.deliver_broken_bikes).to eq [bike]
-  #   end
-  # end
+  describe '#find_broken_bikes' do
+    it "should find broken bikes" do
+      5.times { subject.dock broken_bike }
+      subject.dock bike
+      expect(subject.find_broken_bikes.count).to eq 5
+    end
+  end
+
+  describe '#offload_bikes' do
+    it 'should remove bikes from docking station' do
+      5.times {subject.dock(broken_bike) }
+      subject.dock(bike)
+      broken_bikes = subject.find_broken_bikes
+      subject.offload_bikes(broken_bikes)
+      expect(subject.find_broken_bikes.count).to eq 0
+    end
+  end
 end
